@@ -1,14 +1,17 @@
 {
-  "name": "sample-presentation",
+  "name": "2016-BigData-sql1",
   "private": "true",
   "version": "0.1.0",
   "authors": [
-    "Zhenfei Nie <youyis2fox@gmail.com>",
+    "Alberto Tonon",
     "Vassilis Triglianos"
   ],
-  "description": "asq-elements",
+  "description": "SQL slides for 2016 Big Data",
   "main": "app.js",
   "keywords": [
+    "Big Data",
+    "SQL",
+    "University of Fribourg",
     "asq",
     "shadowDOM"
   ],
@@ -24,7 +27,6 @@
   "dependencies": {
     "asq-elements": "ASQ-USI-Elements/asq-elements#master",
     "webcomponentsjs": "*",
-    "paper-icon-button": "polymerelements/paper-icon-button#^1.0.3",
     "asq-canvas": "asq-usi-elements/asq-canvas#master"
   }
 }
