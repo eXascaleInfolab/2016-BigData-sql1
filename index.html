@@ -51,7 +51,7 @@
         <h1>Simple SQL Review and PostgreSQL Install "Party"</h1>
         <h3>Big Data Infrastructure Course, SA 2016</h3>
         <hr />
-        <h4> Alberto Tonon </h4>
+        <h4> Alberto Tonon - <i><a href="mailto:alberto@exascale.info">alberto@exascale.info</a></i></h4>
         <asq-welcome></asq-welcome>
       </section>
 
@@ -231,6 +231,20 @@ WHERE ... LIKE ...;
         </asq-exercise>
       </section>
 
+      <section class="step" id="sql1_s" data-x="13500" data-y="4000" data-z="4000">   
+        <code>supplier(<u>suppID</u>, name)</code><br/>
+        <code>product(<u>prodID</u>, name)</code><br/>
+        <code>component(<u>compID</u>, name)</code><br/>
+        <code>composed_by(<u>prodID, compID</u>, quantity)</code><br/>
+        <code>sells(<u>suppID, compID</u>, price)</code><br/>
+      
+        <pre style="color: blue;">
+SELECT prodID 
+FROM product
+WHERE name LIKE 'EVA%';
+        </pre>
+      </section>
+
 
       <section class="step" id="sql2" data-x="15000" data-y="3000" data-z="4000">   
         <code>supplier(<u>suppID</u>, name)</code><br/>
@@ -251,6 +265,26 @@ WHERE ...;
         </asq-exercise>
       </section>
 
+      <section class="step" id="sql2_s" data-x="15000" data-y="4000" data-z="4000">   
+        <code>supplier(<u>suppID</u>, name)</code><br/>
+        <code>product(<u>prodID</u>, name)</code><br/>
+        <code>component(<u>compID</u>, name)</code><br/>
+        <code>composed_by(<u>prodID, compID</u>, quantity)</code><br/>
+        <code>sells(<u>suppID, compID</u>, price)</code><br/>
+      
+        <pre  style="color: blue;">
+SELECT product.name 
+FROM product 
+  JOIN composed_by 
+    ON product.prodID = composed_by.prodID
+  JOIN component 
+    ON component.compID = composed_by.compID
+WHERE component.name = 'LCL tank'
+AND composed_by.quantity >= 2;
+        </pre>
+      </section>
+
+
       <section class="step" id="sql3" data-x="16500" data-y="3000" data-z="4000">   
         <code>supplier(<u>suppID</u>, name)</code><br/>
         <code>product(<u>prodID</u>, name)</code><br/>
@@ -258,8 +292,7 @@ WHERE ...;
         <code>composed_by(<u>prodID, compID</u>, quantity)</code><br/>
         <code>sells(<u>suppID, compID</u>, price)</code><br/>
       
-
-         <asq-exercise max-num-submissions="3" assessment="self">
+        <asq-exercise max-num-submissions="3" assessment="self">
              <asq-code-q  theme="monokai" mode="sql" font-size="0.8em">
                <asq-stem><p>Show the histogram of the prices of the components sold by "NERV", i.e., count how many products are sold by NERV for each price, ordered by decreasing price.</p></asq-stem>
 <code>SELECT ... 
@@ -271,181 +304,82 @@ ORDER BY... ;
              </asq-code-q>
         </asq-exercise>
       </section>
-<!--
-      <section class="step" id="asq-code-q" data-x="4500" data-y="0" data-z="1000">
+
+      <section class="step" id="sql3_s" data-x="16500" data-y="4000" data-z="4000">   
+        <code>supplier(<u>suppID</u>, name)</code><br/>
+        <code>product(<u>prodID</u>, name)</code><br/>
+        <code>component(<u>compID</u>, name)</code><br/>
+        <code>composed_by(<u>prodID, compID</u>, quantity)</code><br/>
+        <code>sells(<u>suppID, compID</u>, price)</code><br/>
+      
+        <pre style="color: blue;">
+SELECT sells.price, count(*) AS cnt
+FROM sells JOIN supplier 
+  ON sells.suppID = supplier.suppID
+WHERE supplier.name = 'NERV'
+GROUP BY sells.price
+ORDER BY cnt DESC
+        </pre>
+      </section>
+
+
+      <section class="step" id="sql4" data-x="18000" data-y="3000" data-z="4000">   
+        <code>supplier(<u>suppID</u>, name)</code><br/>
+        <code>product(<u>prodID</u>, name)</code><br/>
+        <code>component(<u>compID</u>, name)</code><br/>
+        <code>composed_by(<u>prodID, compID</u>, quantity)</code><br/>
+        <code>sells(<u>suppID, compID</u>, price)</code><br/>
+      
          <asq-exercise max-num-submissions="3" assessment="self">
              <asq-code-q  theme="monokai" mode="sql" font-size="0.8em">
-               <asq-stem><h3>Create a Database called </h3></asq-stem>
-              <code></code>
+               <asq-stem><p><b>*</b> Select the IDs of the supplier(s) selling component 10 at the cheapest price.</p></asq-stem>
+<code>SELECT ... 
+FROM ...
+WHERE ...
+</code>
              </asq-code-q>
         </asq-exercise>
-       </section> -->
-<!-- 
-       <section class="step" id="asq-multi-choice-q" data-x="1500" data-y="0" data-z="1000">
-        <asq-exercise max-num-submissions="-1" assessment="self"> 
-          <asq-stem><h2>&lt;asq-multi-choice-q&gt; question</h2></asq-stem>
-          <asq-multi-choice-q selected="op3">
-            <asq-stem><h3>Here you can pick just one answer:</h3></asq-stem>
-            <asq-option name="op0">Option 0</asq-option>
-            <asq-option name="op1">Option 1</asq-option>
-            <asq-option name="op2">Option 2</asq-option>
-            <asq-option name="op3">Option 3</asq-option>
-          </asq-multi-choice-q>
-          <asq-multi-choice-q selected-values='["op1", "op2"]' multi stats-layout="vertical">
-            <asq-stem><h3>Here you can pick as many as you want</h3></asq-stem>
-            <asq-option name="op0">Option 0</asq-option>
-            <asq-option name="op1">Option 1</asq-option>
-            <asq-option name="op2">Option 2</asq-option>
-            <asq-option name="op3">Option 3</asq-option>
-          </asq-multi-choice-q>
-        </asq-exercise>
       </section>
 
-     <section class="step" id="asq-text-input-q" data-x="3000" data-y="0" data-z="1000">
-        <asq-exercise max-num-submissions="8" confidence>
-          <asq-text-input-q label="value" id="text-q">
-            <asq-stem><h5>What's value of a[3]?</h5></asq-stem>
-            <pre><code>
-              char a[27];
-              char *b = "abc";
-              strcpy(a, b);</code></pre>
-            <asq-solution hidden>\0</asq-solution>
-          </asq-text-input-q>
-       </asq-exercise>
-      </section>
-
-      <section class="step" id="asq-text-input-q-stats" data-x="4500" data-y="0" data-z="2000">
-           <asq-text-input-q-stats for="text-q">
-           <h3>This page shows stats for the previous &lt;asq-text-input-q&gt; question</h3>
-           </asq-text-input-q-stats>
-       </section>
-
-       <section class="step" id="asq-css-select-q" data-x="6000" data-y="0" data-z="1000">
-        <asq-exercise max-num-submissions="9">
-          <asq-css-select-q htmlcode="<ul><li class='aclass'><ul id='aid'><li></li><li></li></ul></li><div><p></p><p class='bclass'></p></div></li></ul>">
-            <asq-stem><h3>Select all 'li' elements:</h3></asq-stem>
-          </asq-css-select-q>
-       </asq-exercise>
-      </section>
-
-      <section class="step" id="asq-js-function-body" data-x="7500" data-y="0" data-z="1000">
-        <asq-exercise max-num-submissions="1">
-          <asq-js-function-body-q function-name="wrap(str, tagName)" test-exp="wrap('hello World', 'div');">
-            <asq-stem><h4>Implement a function that wraps a given string with an HTML tag:</h4></asq-stem>
-          </asq-js-function-body-q>
-       </asq-exercise>
-      </section> 
-
-    <section class="step" id="asq-buckets-q" data-x="9000" data-y="0" data-z="1000">
-      <asq-exercise class="container">
-        <asq-buckets-q role="viewer"
-          mode="1-3" 
-          x-matchable="div[buckets]" 
-          y-matchable="div[labels]" 
-          attr-for-matched="s-name"
-          matched-attribute="matched"
-          matched-class="label-success">
-
-          <asq-stem><h4>Drag the labels (name of cites) to match the buckets.</h4></asq-stem>
-          <div buckets>
-            <div s-name="Europe" class="bucket"><b>Europe</b></div>
-            <div s-name="North America" class="bucket"><b>North America</b></div>
-            <div s-name="Middle East" class="bucket"><b>Middle East</b></div>
-          </div>
-          
-          <div labels>
-            <div s-name="New York"  class="label label-primary">New York</div>
-            <div s-name="London"  class="label label-primary">London</div>
-            <div s-name="Zurich"  class="label label-primary">Zurich</div>
-            <div s-name="Jerusalem"  class="label label-primary">Jerusalem</div>
-            <div s-name="Chicago"  class="label label-primary">Chicago</div>
-            <div s-name="Lugano"  class="label label-primary">Lugano</div>
-          </div>
-        </asq-buckets-q>
+      <section class="step" id="sql4_s" data-x="18000" data-y="4000" data-z="4000"> 
+        <code>supplier(<u>suppID</u>, name)</code><br/>
+        <code>product(<u>prodID</u>, name)</code><br/>
+        <code>component(<u>compID</u>, name)</code><br/>
+        <code>composed_by(<u>prodID, compID</u>, quantity)</code><br/>
+        <code>sells(<u>suppID, compID</u>, price)</code><br/>  
+        <pre style="color: blue;">
+SELECT suppID
+FROM sells AS s0
+WHERE compID = 10
+AND NOT EXISTS (
+  SELECT *
+  FROM sells AS s1
+  AND s1.price < s0.price
+);
+        </pre>
       </section>
 
 
-      <section class="step" id="asq-order-q" data-x="10500" data-y="0" data-z="1000">
-        <asq-exercise>
-          <asq-order-q sortable="[label]">
-            <asq-stem>Specify the order of Polymer lifecycle methods.</asq-stem>
-            <div label class="static" name="ready">ready</div>
-            <div label class="static" name="attached">attached</div>
-            <div label class="static" name="created">created</div>
-            <div label class="static" name="detached">detached</div>
-          </asq-order-q>
-       </asq-exercise>
+      <section class="step" id="postgresInstall" data-x="19500" data-y="5000" data-z="5000"> 
+          <h1>PostgreSQL Installation</h1>
+          <ul>
+            <li>If you have a Mac: <a href="http://postgresapp.com/">http://postgresapp.com/</a></li>
+            <li>If you are using LinUx use Yum, apt-get, emerge, etc.</li>
+            <li>Otherwise use the official website <a href="http://www.postgresql.org/download/">http://www.postgresql.org/download/</a> </li>
+            <li>We're here to help if you have troubles ;-)</li>
+          </ul>
       </section>
 
 
-       <section class="step" id="asq-code-q" data-x="12000" data-y="0" data-z="1000">
-         <asq-exercise max-num-submissions="3" assessment="self">
-             <asq-code-q  theme="monokai" mode="javascript" font-size="0.8em">
-               <asq-stem><h3>Write a simple for loop in JavaScript </h3></asq-stem>
-<code>public class C {      
-  public void m() {
-    int i = i + 5 + ((int)5.0) + ((int)5f);
-  }
-}</code>
-             </asq-code-q>
-        </asq-exercise>
-       </section>
-      
-      <section class="step" id="asq-highlight-q" data-x="13500" data-y="0" data-z="1000">
-        <asq-exercise max-num-submissions="-1">
-            <asq-highlight-q  theme="textmate" mode="java" font-size="0.65em">
-            <asq-solution>{"d9534f":[{"start":{"row":1,"column":2},"end":{"row":1,"column":8},"id":216},{"start":{"row":0,"column":0},"end":{"row":0,"column":6},"id":222}],"428bca":[{"start":{"row":2,"column":4},"end":{"row":2,"column":7},"id":229}],"f0ad4e":[{"start":{"row":0,"column":7},"end":{"row":0,"column":12},"id":236},{"start":{"row":1,"column":9},"end":{"row":1,"column":13},"id":243},{"start":{"row":2,"column":22},"end":{"row":2,"column":25},"id":250},{"start":{"row":2,"column":35},"end":{"row":2,"column":38},"id":256}]}</asq-solution>
-              <asq-stem><h3>Highlight with the appropriate color the following:</h3></asq-stem>
-              <asq-hl-color-task color="d9534f">Visibility Modifiers</asq-hl-color-task>
-                <asq-hl-color-task color="428bca">Variable Declarations</asq-hl-color-task>
-                <asq-hl-color-task color="f0ad4e">Other keywords</asq-hl-color-task>
-    <code>public class C {      
-  public void m() {
-    int i = i + 5 + ((int)5.0) + ((int)5f);
-  }
-}</code>
-            </asq-highlight-q>
-       </asq-exercise>
+      <section class="step" id="feedback" data-x="19500" data-y="8000" data-z="6000"> 
+          <h1>That's all, folks!</h1>
+          <ul>
+            <li><em>Constructive</em> feedback on this interactive presentation is much appreciated.</li>
+            <li>If you have problems with the homeworks or you don't understand something contact me.</li>
+          </ul>
+          <i><a href="mailto:alberto@exascale.info">alberto@exascale.info</a></i>
       </section>
 
-<!--       <section class="step fullscreen" id="asq-fiddle-q" data-x="15000" data-y="0" data-z="1000">
-        <asq-exercise max-num-submissions="-1">
-          <asq-fiddle-q>
-            <asq-stem>
-              <h4>Try to recreate the following image using HTML5 and CSS</h4>
-            <asq-stem>
-            <img src="img/mockup.png" width="200px" alt="">
-          </asq-fiddle-q>
-        </asq-exercise>
-      </section>
- 
-      <section class="step" id="asq-sqlite-q" data-x="16500" data-y="0" data-z="1000">
-        <asq-exercise max-num-submissions="-1">
-            <asq-sqlite-q db-url="assets/Chinook_Sqlite.sqlite" font-size="0.6em">
-              <asq-stem><h4>INSERT some valid data in the TABLE `Employee`</h4></asq-stem>
-              <code></code>
-              <asq-solution>INSERT INTO `Employee` VALUES ()</asq-solution>
-            </asq-sqlite-q>
-        </asq-exercise>
-      </section>
-
-      <section class="step" id="asq-rating-q" data-x="18000" data-y="0" data-z="1000">
-         <asq-exercise max-num-submissions="-1">
-          <asq-rating-q type="stars">
-            <asq-stem><h4>An asq-rating-q question.</h4></asq-stem>
-            <asq-rating-item name="item-1">Item to rate #1</asq-rating-item>
-            <asq-rating-item name="item-2">Item to rate #2</asq-rating-item>
-            <asq-rating-item name="item-3">Item to rate #3</asq-rating-item>
-            <asq-rating-item name="item-4">Item to rate #4</asq-rating-item>
-          </asq-rating-q>
-        </asq-exercise>
-      </section>
-
-      <section class="step" id="asq-canvas" data-x="19500" data-y="0" data-z="1000">
-        <h3>This presentation has an &lt;asq-canvas&gt; element</h3>
-        <p>This element allows the presenter to start drawing by pressing `c` and then using their mouse. The drawing is then shared with the viewers.</p>
-      </section>
- -->
     </div>
     <div class="hint">
       <p>
