@@ -150,6 +150,15 @@ p{
 	margin: 0.5em 0 0.5em 0;
 }
 
+code{
+  font-family: monaco, Consolas, 'Lucida Console', monospace;
+  padding: 2px 4px;
+  font-size: 90%;
+  color: #985C22;
+  background-color: #FBF4EE; 
+  border-radius: 4px;
+}
+
 .nav li{
 	font-size: 0.7em;
 }

@@ -12,7 +12,9 @@
 
     <link href='//fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,400,300,600,700' rel='stylesheet' type='text/css'>
 
-    <link href="css/ASQBasicImpress.css" type="text/css" rel="stylesheet"/>    
+    <link href="css/ASQBasicImpress.css" type="text/css" rel="stylesheet"/>
+    <link href="css/rainbow.min.css" type="text/css" rel="stylesheet"/>
+
 
     <script>
       // Setup Polymer options
@@ -213,8 +215,7 @@
       </section>
 
       <section class="step" id="createtable-s" data-x="12000" data-y="0" data-z="3000">
-        <pre>
-CREATE TABLE composed_by (
+        <pre><code>CREATE TABLE composed_by (
   prodID INTEGER,
   compID INTEGER,
   quantity NUMERIC DEFAULT 1 NOT NULL,
@@ -224,8 +225,7 @@ CREATE TABLE composed_by (
     ON DELETE RESTRICT ON UPDATE CASCADE,
   FOREIGN KEY(compID) REFERENCES component(compID) 
     ON DELETE RESTRICT ON UPDATE CASCADE
-);
-        </pre>
+);</code></pre>
         <p>Other types of referential actions? Other constraints?</p>
       </section>
       
@@ -419,6 +419,8 @@ AND NOT EXISTS (
       </section>
 
     </div>
+    <script src="js/highlight.min.js"></script>
+    <script>hljs.initHighlightingOnLoad();</script>
     <script src="js/impress.js"></script>
     <script src="js/main.js"></script>
 
