@@ -1,1 +1,0 @@
-## ASQ Text input question element
