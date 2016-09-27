@@ -257,8 +257,30 @@ p{
 .impress-enabled #impress { pointer-events: auto }
 
 
-/* Per slide */
+#powered-by-asq{
+    position: fixed;
+    font-size: 0.85em;
+    bottom: 20px;
+    left: 10px;
+    pointer-events: auto;
+}
 
+#powered-by-asq a{
+    display: inline-block;
+}
+
+#powered-by-asq img{
+    width: 80px;
+    position: relative;
+    top: 11px;
+    left:4px;
+}
+
+
+/* Per slide */
+body.impress-on-intro #powered-by-asq{
+    display: block;
+}
 
 @media print {
  /* put styles for print here*/
