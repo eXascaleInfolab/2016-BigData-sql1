@@ -1,0 +1,30 @@
+{
+  "name": "sample-presentation",
+  "private": "true",
+  "version": "0.1.0",
+  "authors": [
+    "Zhenfei Nie <youyis2fox@gmail.com>",
+    "Vassilis Triglianos"
+  ],
+  "description": "asq-elements",
+  "main": "app.js",
+  "keywords": [
+    "asq",
+    "shadowDOM"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "asq-elements": "ASQ-USI-Elements/asq-elements#master",
+    "webcomponentsjs": "*",
+    "paper-icon-button": "polymerelements/paper-icon-button#^1.0.3",
+    "asq-canvas": "asq-usi-elements/asq-canvas#master"
+  }
+}
